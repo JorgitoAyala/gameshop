@@ -1,0 +1,1 @@
+# Si quiero eliminar un cliente debo actualizar el id de todos los registros en orden

@@ -1,35 +1,5 @@
 import csv
 
-# Crear datos en el archivo .csv seleccionado
-def createData(file_path, headers, data):
-
-  with open(file_path, mode="a", newline="") as csv_file:
-    writer = csv.DictWriter(csv_file, fieldnames=headers)
-
-    # Verificar si el documento .csv está vacío
-    if csv_file.tell() == 0:
-      writer.writeheader()
-
-    writer.writerows(data)
-
-
-# Leer todos los datos del archivo .csv seleccionado
-def readData(file_path):
-  
-  data = []
-  
-  with open(file_path, mode="r") as csv_file:
-    reader = csv.DictReader(csv_file)
-
-    for row in reader:
-      data.append(row)
-  
-  return data
-
-
-"""
-FUNCIONES EN GENERAL
-"""
 # Buscar un dato en particular por un atributo en especifico
 def searchByAttribute(search_type: str, search_value: str, filename: str):
   with open(filename, 'r', encoding='utf-8') as csvfile:
@@ -41,6 +11,15 @@ def searchByAttribute(search_type: str, search_value: str, filename: str):
         return row
 
     return None
+
+
+# Crear un nuevo registro en el archivo .csv
+def addData(filename: str, data: dict):
+  with open(filename, 'a', newline='') as csvfile:
+    fieldnames = data.keys()
+    csvwriter = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    csvwriter.writerow(data)
+
 
 # Actualizar un dato en particular por un id en específico
 def updateData(value_id: str, update_key: str, update_value: str, filename: str):
@@ -61,15 +40,12 @@ def updateData(value_id: str, update_key: str, update_value: str, filename: str)
     csvwriter.writeheader()
     csvwriter.writerows(data)
 
+    return None
 
-"""
-FUNCIONES PARA ADMINISTRADORES
-"""
 
-"""
-FUNCIONES PARA CLIENTES
-"""
-
-"""
-FUNCIONES PARA PRODUCTOS
-"""
+# Obtener la cantidad de filas de un documento particular
+def getQuantity(filename:str):
+  with open(filename, 'r', encoding='utf-8') as csvfile:
+    csvreader = csv.reader(csvfile)
+    row_counter = sum(1 for row in csvreader)
+  return row_counter
