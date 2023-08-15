@@ -1,2 +1,7 @@
-id,type,name,description,price,path,category
-P1,snakegame,fbnakhfbashjdsa,12,
+id,type,name,description,price,path,category,selled
+P1,pseint,Juego del Ahorcado,Descubre la palabra secreta y salva a la persona que será ahorcada!,12,ahorcado,puzzles,0
+P2,python,Juego del Ahorcado,Descubre la palabra secreta y salva a la persona que será ahorcada!,15,ahorcado,puzzles,0
+P3,pseint,Juego del Ahorcado,Descubre la palabra secreta y salva a la persona que será ahorcada!,12,ahorcado,puzzles,0
+P4,python,Juego del Ahorcado,Descubre la palabra secreta y salva a la persona que será ahorcada!,15,ahorcado,puzzles,0
+P5,pseint,Juego del Ahorcado,Descubre la palabra secreta y salva a la persona que será ahorcada!,12,ahorcado,puzzles,0
+P6,python,Juego del Ahorcado,Descubre la palabra secreta y salva a la persona que será ahorcada!,15,ahorcado,puzzles,0

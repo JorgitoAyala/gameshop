@@ -1,16 +1,16 @@
 # importing files
 from utils.console import drawUI, clear, lazyMessage
 from api.general import searchByAttribute, getQuantity, addData
-from utils.security import encrypt, decrypt
+from utils.security import encrypt
 from utils.validation import validationInfo
-from utils.conversion import getAgeByBirthday, lineStringWrap
+from utils.conversion import lineStringWrap
 
 # PASO 1: Creación de credenciales de inicio de sesión
 def registerUI():
   clear()
 
   print()
-  print("**************************************************************")
+  print("*"*80)
   print(drawUI(1, ""))
   print(drawUI(1, f" Regístrate como nuevo cliente 😁 ! "))
   print(drawUI(1, ""))
@@ -29,7 +29,7 @@ def registerUI():
   validInfo = validationInfo(repeat_password, "password")
   if(not(validInfo.get("v"))): return errorFound(validInfo.get("m"), "s1")
   print(drawUI(1, ""))
-  print("**************************************************************")
+  print("*"*80)
   print()
 
   lazyMessage("|| Verificando en ", 3)
@@ -48,7 +48,7 @@ def registerUI():
 # PASO 2: Completitud de datos adicionales de perfil:
 def infoCompletion(username: str, password: str):
   print()
-  print("**************************************************************")
+  print("*"*80)
   print(drawUI(1, ""))
   print(drawUI(1, f" Ahora completa los datos de tu perfil 😄 "))
   print(drawUI(1, ""))
@@ -77,7 +77,7 @@ def infoCompletion(username: str, password: str):
   validInfo = validationInfo(birthday, "birthday")
   if(not(validInfo.get("v"))): return errorFound(validInfo.get("m"), "s2")
   print(drawUI(1, ""))
-  print("**************************************************************")
+  print("*"*80)
   print()
 
   # Validación exitosa
@@ -103,11 +103,11 @@ def infoCompletion(username: str, password: str):
     print(f"|| {validInfo.get('m')}")
 
     print()
-    print("**************************************************************")
+    print("*"*80)
     print(drawUI(1, ""))
     print(drawUI(1, " Felicitaciones!, creó su cuenta satisfactoriamente! 🎉 "))
     print(drawUI(1, ""))
-    print("**************************************************************")
+    print("*"*80)
     print()
 
     lazyMessage("|| Será redirigido al inicio de sesión en ", 7)
@@ -119,7 +119,7 @@ def infoCompletion(username: str, password: str):
 # En caso haya un error, step1 (s1) - step2 (s2)
 def errorFound(type_of_error: str, step: str):
   print()
-  print("**************************************************************")
+  print("*"*80)
   print(drawUI(1, ""))
   print(drawUI(1, " Hay un error 🤬 !! "))
   print(drawUI(1, ""))
@@ -128,7 +128,7 @@ def errorFound(type_of_error: str, step: str):
   print(drawUI(2, "A) Intentar nuevamente"))
   print(drawUI(2, "B) Regresar al inicio de sesión"))
   print(drawUI(1, ""))
-  print("**************************************************************")
+  print("*"*80)
   print()
 
   opc = input("|| => 😆 Selecciona una opción: ").upper()

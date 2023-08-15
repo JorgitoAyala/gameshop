@@ -1,24 +1,24 @@
 # importing files
 from utils.console import drawUI, clear, lazyMessage
 from api.general import searchByAttribute
-from utils.security import encrypt, decrypt
+from utils.security import decrypt
 
 # Elección de inicio de sesión
 def chooseRole():
   clear()
 
-  print("**************************************************************")
-  print("  ________                             .__                    ")
-  print(" /  _____/_____    _____   ____   _____|  |__   ____ ______   ")
-  print("/   \  ___\__  \  /     \_/ __ \ /  ___/  |  \ /  _ \ ____ \  ")
-  print("\    \_\  \/ __ \|  Y Y  \  ___/ \___ \|   Y  (  <_> )  |_> > ")
-  print(" \______  (____  /__|_|  /\___  >____  >___|  /\____/|   __/  ")
-  print("        \/     \/      \/     \/     \/     \/       |__|     ")
-  print()
-  print("**************************************************************")
+  print("**********************************************************************************")
+  print("||          ________                             .__                            ||")
+  print("||         /  _____/_____    _____   ____   _____|  |__   ____ ______           ||")
+  print("||        /   \  ___\__  \  /     \_/ __ \ /  ___/  |  \ /  _ \ ____ \          ||")
+  print("||        \    \_\  \/ __ \|  Y Y  \  ___/ \___ \|   Y  (  <_> )  |_> >         ||")
+  print("||         \______  (____  /__|_|  /\___  >____  >___|  /\____/|   __/          ||")
+  print("||                \/     \/      \/     \/     \/     \/       |__|             ||")
+  print("||                                                                              ||")
+  print("**********************************************************************************")
   
   print()
-  print("**************************************************************")
+  print("*"*82)
   print(drawUI(1, ""))
   print(drawUI(1, " Bienvenido a Gameshop 😄 ! "))
   print(drawUI(1, ""))
@@ -31,7 +31,7 @@ def chooseRole():
   print(drawUI(3, "¿Todavía no tienes una cuenta? 😱"))
   print(drawUI(2, "D) Regístrate como cliente ahora"))
   print(drawUI(1, ""))
-  print("**************************************************************")
+  print("*"*82)
   print()
 
   opc = input("|| => 😆 Selecciona una opción: ").upper()
@@ -55,7 +55,7 @@ def loginUI(type_of_user: str):
   clear()
 
   print()
-  print("**************************************************************")
+  print("*"*82)
   print(drawUI(1, ""))
   print(drawUI(1, f" ¡Hola {type_of_user.capitalize()} 😄 ! "))
   print(drawUI(1, ""))
@@ -64,7 +64,7 @@ def loginUI(type_of_user: str):
   username = input("|| => Usuario: ")
   password = input("|| => Contraseña: ")
   print(drawUI(1, ""))
-  print("**************************************************************")
+  print("*"*82)
   print()
 
   lazyMessage("|| Verificando en ", 3)
@@ -88,7 +88,7 @@ def loginUI(type_of_user: str):
 def errorFound(type_of_user: str, type_of_error: str):
 
   print()
-  print("**************************************************************")
+  print("*"*82)
   print(drawUI(1, ""))
   print(drawUI(1, " Hay un error 🤬 !! "))
   print(drawUI(1, ""))
@@ -97,7 +97,7 @@ def errorFound(type_of_user: str, type_of_error: str):
   print(drawUI(2, "A) Intentar nuevamente"))
   print(drawUI(2, "B) Regresar al inicio de sesión"))
   print(drawUI(1, ""))
-  print("**************************************************************")
+  print("*"*82)
   print()
 
   opc = input("|| => 😆 Selecciona una opción: ").upper()
