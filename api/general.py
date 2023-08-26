@@ -13,6 +13,18 @@ def searchByAttribute(search_type: str, search_value: str, filename: str):
     return None
 
 
+# Obtener todos los datos del archivo csv
+def readAllData(filename: str):
+    data = []
+
+    with open(filename, 'r', encoding='utf-8') as csvfile:
+      csvreader = csv.DictReader(csvfile)
+      for fila in csvreader:
+        data.append(fila)
+
+    return data
+
+
 # Crear un nuevo registro en el archivo .csv
 def addData(filename: str, data: dict):
   with open(filename, 'a', newline='') as csvfile:
@@ -48,4 +60,5 @@ def getQuantity(filename:str):
   with open(filename, 'r', encoding='utf-8') as csvfile:
     csvreader = csv.reader(csvfile)
     row_counter = sum(1 for row in csvreader)
+
   return row_counter

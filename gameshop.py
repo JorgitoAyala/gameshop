@@ -1,6 +1,6 @@
 from app.login import chooseRole
-from app.admin_dash import manageProducts
+# from app.client_dash import availableGames
 
 # Inicio del dashboard
 chooseRole()
-#manageProducts("administrador", "A1")
+# availableGames("cliente", "C1")

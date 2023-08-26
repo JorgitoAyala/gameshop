@@ -14,7 +14,7 @@ def getAgeByBirthday(birthday_string: str):
   return age
 
 
-# Convertir de una cadena ("[P001, P002]") a lista (["P001", "P002"])
+# Convertir de una cadena ("[P001-P002]") a lista (["P001", "P002"])
 def fromStringToList(string_data: str):
   dataList = string_data[1:-1].split("-")
 

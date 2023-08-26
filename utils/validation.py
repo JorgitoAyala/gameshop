@@ -34,10 +34,6 @@ def validationInfo(value: str, validation_type: str):
       pattern = r"^(?:(?:19|20)\d\d)-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$"
       message = "La fecha de nacimiento debe contener una estructura válida (YYYY-MM-DD) como el ejemplo siguiente: 2001-10-23"
 
-    case "banking_card":
-      pattern = r"^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$"
-      message = "La tarjeta bancaria debe contener los parametros regulatorios según el tipo de tarjeta que se trate (Visa, MasterCard, American Express, Discover o Diners Club)"
-
     case _:
       return print("CODE ERROR: ¡No existe el tipo de validación!")
 
@@ -47,3 +43,57 @@ def validationInfo(value: str, validation_type: str):
     "v": valid,
     "m": "¡Se ha validado correctamente 😄 !" if valid else message
   }
+
+
+def validationProduct(value: str, validation_type: str):
+  
+  print()
+
+
+def validationBankingCard(value: str, validation_type: str):
+  value = value.encode("latin-1").decode("utf-8")
+
+  match validation_type:
+
+    case "visa":
+      pattern = r"^4[0-9]{12}(?:[0-9]{3})?$"
+      message = "La tarjeta Visa comienza con el dígito 4, seguido de 12 dígitos numéricos y opcionalmente 3 dígitos adicionales al final."
+
+    case "mastercard":
+      pattern = r"^5[1-5][0-9]{14}$"
+      message = "La tarjeta MasterCard comienza con 51 a 55, seguido de 14 dígitos numéricos."
+
+    case "discover":
+      pattern = r"^6(?:011|5[0-9][0-9])[0-9]{12}$"
+      message = "La tarjeta Discover, comienza con 6011 o con 65 seguido de dos dígitos entre 00 y 99, y luego 12 dígitos numéricos adicionales"
+      
+    case "american_express":
+      pattern = r"^3[47][0-9]{13}$"
+      message = "La tarjeta American Express comienza con 34 o 37, seguido de 13 dígitos numéricos."
+      
+    case "diners_club":
+      pattern = r"3(?:0[0-5]|[68][0-9])[0-9]{11}$"
+      message = "La tarjeta Diners Club comienza con 30 a 36, o con 38 o 39, seguido de 11 dígitos numéricos adicionales."
+      
+    case "jcb":
+      pattern = r"^(?:2131|1800|35\d{3})\d{11}$"
+      message = "La tarjeta JCB comienza con 2131, 1800 o 35 seguido de tres dígitos, y luego 11 dígitos numéricos adicionales."
+    
+    case "date_number":
+      pattern = r"^(0[1-9]|1[0-2])\/(1[9-9]|2[0-9])$"
+      message = "La tarjeta bancaria debe tener exactamente el formato de fecha adecuado para poder realizar la transacción del dinero correctamente!"
+
+    case "cvv2_number":
+      pattern = r"^(?!000)\d{3,4}$"
+      message = "El CVV2 de la tarjeta bancaria según el tipo de tarjeta debe tener de 3 a 4 números que sirven para poder validar la tarjeta satisfactoriamente!"
+
+    case _:
+      return print("CODE ERROR: ¡No existe el tipo de validación!")
+  
+  valid = re.match(pattern, value) is not None
+  
+  return {
+    "v": valid,
+    "m": "¡Se ha validado correctamente 😄 !" if valid else message
+  }
+

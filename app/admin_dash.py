@@ -1,6 +1,6 @@
 # importing files
 from utils.console import drawUI, drawTables, clear, lazyMessage
-from api.general import searchByAttribute, getQuantity, addData
+from api.general import readAllData
 from utils.security import encrypt
 from utils.validation import validationInfo
 from utils.conversion import lineStringWrap
@@ -29,10 +29,10 @@ def manageProducts(type_of_user: str, user_id: str):
   print()
 
   match opc:
-    case "A": viewAllProducts()
-    case "B": print()
-    case "C": print()
-    case "D": print()
+    case "A": return viewAllProducts(type_of_user, user_id)
+    case "B": return createProduct(type_of_user, user_id)
+    case "C": return print()
+    case "D": return print()
     case "E":
       from app.dashboard import userDashboard
       return userDashboard(type_of_user, user_id)
@@ -42,8 +42,12 @@ def manageProducts(type_of_user: str, user_id: str):
       return manageProducts(type_of_user, user_id)
 
 
-def viewAllProducts():
+# Ver todos los productos disponibles en el archivo csv
+def viewAllProducts(type_of_user: str, user_id: str):
   clear()
+
+  products = readAllData("./data/producto.csv")
+  loops = len(products)
 
   print()
   print("*"*82)
@@ -52,30 +56,120 @@ def viewAllProducts():
   print(drawUI(1, ""))
   print("*"*82)
   print()
+  
+  for i in range(0, loops, 2):
+    p1 = products[i]
+    p2 = None if(i == loops - 1 and loops % 2 != 0) else products[i+1]
 
-  print("*"*40 + "  " + "*"*40)
-  print(drawTables(1, {"p1": "", "p2": ""}))
-  print(drawTables(1, {"p1": " Juego del ahorcado ", "p2": " Hey! Adivina el número "}))
-  print(drawTables(1, {"p1": "", "p2": ""}))
-  print(drawTables(3, {"p1": "Hecho en: Python 🐍", "p2": "Hecho en: Pseint 🤠"}))
-  print(drawTables(1, {"p1": "", "p2": ""}))
-  print(drawTables(2, {"p1": "Id: P3", "p2": "Id: P4"}))
-  print(drawTables(2, {"p1": "Categoría: puzzles", "p2": "Categoría: mente"}))
-  print(drawTables(2, {"p1": "Precio: S/. 12.00", "p2": "Precio: S/. 10.00"}))
-  print(drawTables(2, {"p1": "Objetivo: rescata al ahorcado!", "p2": "Objetivo: Prueba tu suerte!"}))
-  print(drawTables(2, {"p1": "Cantidad comprada: 18", "10": "Cantidad comprada: 15"}))
-  print(drawTables(1, {"p1": "", "p2": ""}))
-  print("*"*40 + "  " + "*"*40)
+    print("*"*40 + (("  " + "*"*40) if p2 else ""))
+    print(drawTables(1, {"p1": "", "p2": "" if p2 else None }))
+    print(drawTables(1, {
+      "p1": f" {p1.get('name')} ", 
+      "p2": f" {p2.get('name')} " if p2 else None
+      }))
+    print(drawTables(1, {"p1": "", "p2": "" if p2 else None }))
+    print(drawTables(3, {
+      "p1": f"Hecho en: {p1.get('filetype')}",
+      "p2": f"Hecho en: {p2.get('filetype')}" if p2 else None
+      }))
+    print(drawTables(1, {"p1": "", "p2": "" if p2 else None }))
+    print(drawTables(3, {
+      "p1": f"🆔 Id: {p1.get('id')}", 
+      "p2": f"🆔 Id: {p2.get('id')}" if p2 else None
+      }))
+    print(drawTables(3, {
+      "p1": f"👻 Categoría: {p1.get('category')}", 
+      "p2": f"👻 Categoría: {p2.get('category')}" if p2 else None
+      }))
+    print(drawTables(3, {
+      "p1": f"💰 Precio: S/. {p1.get('price')}.00",
+      "p2": f"💰 Precio: S/. {p2.get('price')}.00" if p2 else None
+      }))
+    print(drawTables(3, {
+      "p1": f"😎 Meta: {p1.get('goal')}", 
+      "p2": f"😎 Meta: {p2.get('goal')}" if p2 else None
+      }))
+    print(drawTables(3, {
+      "p1": f"🤑 Vendidos: {p1.get('selled')}",
+      "p2": f"🤑 Vendidos: {p2.get('selled')}" if p2 else None
+      }))
+    print(drawTables(1, {"p1": "", "p2": "" if p2 else None }))
+    print("*"*40 + (("  " + "*"*40) if p2 else ""))
+    print()
+  
+  opc = input("|| => 😮 Tipea 'A' para regresar: ").upper()
   print()
 
+  match opc:
+    case "A": return manageProducts(type_of_user, user_id)
+    case _: 
+      print("No válido, tipéalo nuevamente 🤭 !", end="\n\n")
+      lazyMessage("|| Reiniciando en ", 3)
+      return manageProducts(type_of_user, user_id)
 
-def createProduct():
+
+# Agregar un juego nuevo
+def createProduct(type_of_user: str, user_id: str):
+  clear()
+
   print()
+  print("*"*80)
+  print(drawUI(1, ""))
+  print(drawUI(1, f" Crea un nuevo juego para su venta 🎮 ! "))
+  print(drawUI(1, ""))
+  print(drawUI(2, "Crea los datos del producto:"))
+  print(drawUI(1, ""))
+  
+  # id,filetype,name,goal,price,path,category,selled
+  # register 
+  filetype = input("|| => ¿El programa está en Python 🐍 o en Pseint 🤠 ?: ")
+  name = input("|| => 🎮 ¿Cúal es el nombre del juego?: ")
+  goal = input("|| => 👻 ¿Cúal es el objetivo del juego?: ")
+  price = input("|| => 🤑 ¿Cúal es el precio del producto?: ")
+  path = input("|| => 😎 ¿Cúal el nombre de su archivo?: ")
+  category = input("|| => 👾 ¿Cúal es la categoría del producto?: ")
+
+  row_count = 1
+
+  new_product_data = {
+    "id": f"P{row_count}",
+    "filetype": filetype,
+    "name": name,
+    "goal": goal,
+    "price": price,
+    "path": path,
+    "category": category,
+    "selled": 0,
+  }
+
+  print(drawUI(1, ""))
+  print("*"*80)
+  print()
+
+  lazyMessage("|| Verificando en ", 3)
+
+  """
+  # Hacer la verificación si el usuario existe
+  result = searchByAttribute("username", username, "./data/cliente.csv")
+
+  if(result is None):
+    if(password == repeat_password):
+      return infoCompletion(username, password)
+    else: return errorFound("¡Las contraseñas ingresadas no coinciden!", "s1")
+  else: 
+    return errorFound("¡El usuario especificado ya existe!, ingrese un usuario diferente.", "s1")
+  """
+
+  print()
+
 
 def updateProduct(product_id: str):
+
   print()
 
+
 def deleteProduct(product_id: str):
+
   print()
 
 

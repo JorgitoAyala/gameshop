@@ -1,7 +1,8 @@
-id,type,name,description,price,path,category,selled
-P1,pseint,Juego del Ahorcado,Descubre la palabra secreta y salva a la persona que será ahorcada!,12,ahorcado,puzzles,0
-P2,python,Juego del Ahorcado,Descubre la palabra secreta y salva a la persona que será ahorcada!,15,ahorcado,puzzles,0
-P3,pseint,Juego del Ahorcado,Descubre la palabra secreta y salva a la persona que será ahorcada!,12,ahorcado,puzzles,0
-P4,python,Juego del Ahorcado,Descubre la palabra secreta y salva a la persona que será ahorcada!,15,ahorcado,puzzles,0
-P5,pseint,Juego del Ahorcado,Descubre la palabra secreta y salva a la persona que será ahorcada!,12,ahorcado,puzzles,0
-P6,python,Juego del Ahorcado,Descubre la palabra secreta y salva a la persona que será ahorcada!,15,ahorcado,puzzles,0
+id,filetype,name,goal,price,path,category,selled
+P1,Pseint 🤠,Rock paper scissors 🤏 !,Gana con técnica!,12,rocks_paper_scissors.psc,azar,2
+P2,Python 🐍,Snake 🐍 !,Come todo lo que puedas!,15,snake_game.py,puzzles,0
+P3,Pseint 🤠,Tic Tac Toe 😎 !,Tres en raya y ganas!,12,tic_tac_toe.psc,tecnica,0
+P4,Pseint 🤠,El ahorcado 😵 !,Salva al ahorcado!,15,ahorcado.psc,tecnica,1
+P5,Python 🐍,Palabras desordenadas 🙃 !,Ordenalo todo!,11,palabras_desordenadas.py,puzzles,0
+P6,Python 🐍,Ping Pong 🤩 !,Cooperativo!,29,ping_pong.py,tecnica,0
+P7,Python 🐍,Sudoku! 😛,Completa los cuadros!,25,sudoku.py,puzzles,0
